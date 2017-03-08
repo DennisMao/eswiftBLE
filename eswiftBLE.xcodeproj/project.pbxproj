@@ -14,6 +14,7 @@
 		04AAF5F51E6FB1A300B73041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AAF5F31E6FB1A300B73041 /* LaunchScreen.storyboard */; };
 		04AAF6001E6FB1A300B73041 /* eswiftBLETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF5FF1E6FB1A300B73041 /* eswiftBLETests.swift */; };
 		04AAF60B1E6FB1A400B73041 /* eswiftBLEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF60A1E6FB1A400B73041 /* eswiftBLEUITests.swift */; };
+		04AAF6191E6FB36A00B73041 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF6181E6FB36A00B73041 /* ServiceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		04AAF6061E6FB1A300B73041 /* eswiftBLEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eswiftBLEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAF60A1E6FB1A400B73041 /* eswiftBLEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eswiftBLEUITests.swift; sourceTree = "<group>"; };
 		04AAF60C1E6FB1A400B73041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04AAF6181E6FB36A00B73041 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				04AAF5EA1E6FB1A300B73041 /* AppDelegate.swift */,
 				04AAF5EC1E6FB1A300B73041 /* ViewController.swift */,
+				04AAF6181E6FB36A00B73041 /* ServiceViewController.swift */,
 				04AAF5EE1E6FB1A300B73041 /* Main.storyboard */,
 				04AAF5F11E6FB1A300B73041 /* Assets.xcassets */,
 				04AAF5F31E6FB1A300B73041 /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 			files = (
 				04AAF5ED1E6FB1A300B73041 /* ViewController.swift in Sources */,
 				04AAF5EB1E6FB1A300B73041 /* AppDelegate.swift in Sources */,
+				04AAF6191E6FB36A00B73041 /* ServiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
