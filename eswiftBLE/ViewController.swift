@@ -10,7 +10,7 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController, CBCentralManagerDelegate,CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource {
+class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDelegate,UITableViewDataSource {
     //控件
     @IBOutlet weak var myButtonScan: UIButton!
     @IBOutlet weak var myTableView: UITableView!

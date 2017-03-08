@@ -9,12 +9,11 @@
 import UIKit
 import CoreBluetooth
 
-class ServiceViewController: UIViewController,CBCentralManagerDelegate,UITextFieldDelegate, CBPeripheralDelegate{
+class ServiceViewController: UIViewController,UITextFieldDelegate,CBCentralManagerDelegate, CBPeripheralDelegate{
     
     /************************ 类变量 *********************/
     //控件
     @IBOutlet weak var trTextInfo: UITextView!
-    
     @IBOutlet weak var trTextDataRead: UITextView!
     @IBOutlet weak var trTextDataWrite: UITextField!
     //属性
@@ -30,10 +29,21 @@ class ServiceViewController: UIViewController,CBCentralManagerDelegate,UITextFie
     /************************ 系统函数 *********************/
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        if let name = PeripheralToConncet.name  {
+            self.navigationItem.title = name
+        }
+        
+        switch PeripheralToConncet.state {
+        case CBPeripheralState.connected:
+            NSLog("已连接")
+        case CBPeripheralState.disconnected:
+            NSLog("未连接")
+        default:
+            NSLog("状态错误")
+        }
             //连接设备
-            //trCBCentralManager.connect(PeripheralToConncet, options: nil)
+            self.trCBCentralManager.connect(PeripheralToConncet, options: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -44,8 +54,15 @@ class ServiceViewController: UIViewController,CBCentralManagerDelegate,UITextFie
     }
     @IBAction func trEnterData(_ sender: Any) {
     }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    //点击“重新连接”响应函数
+    @IBAction func trReconnect(_ sender: Any) {
+        NSLog("重新连接\(PeripheralToConncet.name!)")
+        if PeripheralToConncet.state == CBPeripheralState.disconnected{
+             trCBCentralManager.connect(PeripheralToConncet, options: nil)
+        }
+
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //输入完成 键盘消失
         trTextDataWrite.resignFirstResponder()
         return true
@@ -53,6 +70,10 @@ class ServiceViewController: UIViewController,CBCentralManagerDelegate,UITextFie
     //点击屏幕其他位置可以关闭键盘
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         trTextDataWrite.resignFirstResponder() //关闭数字键盘
+    }
+    //向下滑动关闭键盘
+    @IBAction func trPan(_ sender: Any) {
+        trTextDataWrite.resignFirstResponder()
     }
     /****************  蓝牙函数委托响应   ***************/
     func centralManagerDidUpdateState(_ central: CBCentralManager){

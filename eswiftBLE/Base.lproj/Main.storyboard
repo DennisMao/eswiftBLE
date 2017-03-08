@@ -60,7 +60,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGG-9n-fpb">
-                                <rect key="frame" x="16" y="20" width="61" height="30"/>
+                                <rect key="frame" x="16" y="28" width="61" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="搜索"/>
@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOk-0x-4hA">
-                                <rect key="frame" x="309" y="20" width="50" height="30"/>
+                                <rect key="frame" x="309" y="28" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="清除"/>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="设备搜索" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oa1-iK-qcg">
-                                <rect key="frame" x="134" y="25" width="106" height="21"/>
+                                <rect key="frame" x="134" y="33" width="106" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -128,7 +128,11 @@
                                                 <segue destination="ddd-9G-nEy" kind="showDetail" animates="NO" id="ypr-4Z-nHC"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="重新连接" id="yvE-Uj-wXz"/>
+                                        <barButtonItem key="rightBarButtonItem" title="重新连接" id="yvE-Uj-wXz">
+                                            <connections>
+                                                <action selector="trReconnect:" destination="n7G-Az-Cyy" id="TnS-ik-ftc"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -151,7 +155,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numbersAndPunctuation"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="alphabet"/>
                                 <connections>
                                     <action selector="trEnterData:" destination="n7G-Az-Cyy" eventType="editingDidEnd" id="nfF-0i-lYy"/>
                                 </connections>
@@ -174,6 +178,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="vd3-KU-jsM" appends="YES" id="SAF-AP-Y6B"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="数据传输" id="Qen-8C-d3J">
                         <barButtonItem key="rightBarButtonItem" title="重新连接" id="UXp-T5-AZ4"/>
@@ -185,6 +193,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JRt-Mh-07W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="vd3-KU-jsM">
+                    <connections>
+                        <action selector="trPan:" destination="n7G-Az-Cyy" id="PRT-HV-wqC"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3700" y="122.78860569715144"/>
         </scene>
