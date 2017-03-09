@@ -13,14 +13,16 @@ class ServiceViewController: UIViewController,UITextFieldDelegate,CBCentralManag
     
     /************************ 类变量 *********************/
     //控件
+    @IBOutlet weak var trTextConnectState: UILabel!
+    @IBOutlet weak var trTextDeviceName: UILabel!
     @IBOutlet weak var trTextInfo: UITextView!
     @IBOutlet weak var trTextDataRead: UITextView!
     @IBOutlet weak var trTextDataWrite: UITextField!
+
     //属性
-    
+    var trFlagLastConnectState : Bool! = false
     //容器，保存搜索到的蓝牙设备
     var PeripheralToConncet : CBPeripheral!
-    var peripheralConnected : CBPeripheral!
     var trPeripheralManger : CBPeripheralManager!
     var trCBCentralManager : CBCentralManager!
     var trCharactisics : NSMutableArray = NSMutableArray() //初始化用于储存Charactisic
@@ -30,25 +32,37 @@ class ServiceViewController: UIViewController,UITextFieldDelegate,CBCentralManag
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let name = PeripheralToConncet.name  {
+        if let name = PeripheralToConncet.name {
             self.navigationItem.title = name
         }
         
         switch PeripheralToConncet.state {
         case CBPeripheralState.connected:
             NSLog("已连接")
+            trTextConnectState.text = "已连接"
+            trTextConnectState.textColor = UIColor.green
+            trFlagLastConnectState = true
         case CBPeripheralState.disconnected:
             NSLog("未连接")
+            trTextConnectState.text = "未连接"
+            trTextConnectState.textColor = UIColor.green
+            if !trFlagLastConnectState {
+                NSLog("设备\(PeripheralToConncet.name!)已断开连接")
+                trFlagLastConnectState = false
+            }
         default:
             NSLog("状态错误")
         }
-            //连接设备
-            self.trCBCentralManager.connect(PeripheralToConncet, options: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(<#T##animated: Bool##Bool#>)
+        trCBCentralManager.cancelPeripheralConnection(PeripheralToConncet) //页面关闭时断开连接
+    }
+    
     /****************** 控件响应 *********************/
     @IBAction func trWriteData(_ sender: Any) {
     }
@@ -94,10 +108,10 @@ class ServiceViewController: UIViewController,UITextFieldDelegate,CBCentralManag
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         //停止搜索并发现服务
         NSLog("正在连接")
-        self.peripheralConnected! = peripheral
-        self.peripheralConnected.delegate = self //绑定外设
-        self.peripheralConnected.discoverServices(nil)//搜索服务
-        NSLog("已连接上设备\(peripheral.name)")
+        self.PeripheralToConncet! = peripheral
+        self.PeripheralToConncet.delegate = self //绑定外设
+        self.PeripheralToConncet.discoverServices(nil)//搜索服务
+        NSLog("重新连接上设备\(peripheral.name)")
     }
     
     //链接失败，响应函数

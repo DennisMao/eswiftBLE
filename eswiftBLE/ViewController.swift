@@ -10,11 +10,17 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDelegate,UITableViewDataSource {
+class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDelegate,UITableViewDataSource {
     //控件
     @IBOutlet weak var myButtonScan: UIButton!
     @IBOutlet weak var myTableView: UITableView!
 
+    let alertConnect = UIAlertController(title: "系统提示",
+                                            message: "正在连接:...", preferredStyle: .alert)
+    let alertError = UIAlertController(title: "系统提示",
+                                       message: "连接失败", preferredStyle: .alert)
+    let alertTIMEOUT = UIAlertController(title: "系统提示",
+                                       message: "连接超时", preferredStyle: .alert)
     //属性
     var flagScan : Bool! = false
     var myCentralManager: CBCentralManager!
@@ -30,12 +36,20 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
+
+        //添加Tableview的绑定
         myTableView.delegate = self
         myTableView.dataSource = self
         self.view.addSubview(myTableView)
+        //添加提示框
+        let cancelAction = UIAlertAction(title: "取消连接", style: .default, handler: {
+            action in
+            self.myCentralManager.cancelPeripheralConnection(self.myPeripheralToMainView)
+        })
+        alertConnect.addAction(cancelAction)
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+        alertError.addAction(okAction)
+        alertTIMEOUT.addAction(okAction)
         
     }
     
@@ -49,7 +63,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDele
     
     @IBAction func acScan(_ sender: Any) {
         if flagScan == true {
-            NSLog("停止搜索")
             NSLog("停止搜索")
             self.myCentralManager.stopScan()
             myButtonScan.setTitle("搜索", for: UIControlState.normal)
@@ -69,9 +82,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDele
         myTableView.reloadData()
         
     }
-    //*****************************************
+    /********************** 蓝牙响应函数 **********************/
     
-    //检查该设备权限是否支持蓝牙
+    //检查外设管理器状态
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
             
@@ -107,6 +120,24 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDele
         }
         self.myTableView.reloadData()
         NSLog("刷新屏幕")
+    }
+    //链接成功，相应函数
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        NSLog("已连接\(peripheral.name)")
+        self.myPeripheralToMainView! = peripheral
+        alertConnect.dismiss(animated: true)
+        self.performSegue(withIdentifier: "SearchViewtoServiceView", sender: nil)
+    }
+    //自定义的连接函数，会弹出提示框
+    func connectPeripheral(peripheral:CBPeripheral){
+       myCentralManager.connect(peripheral, options: nil)
+        var nameToConnect : String!
+        if peripheral.name == nil {
+           nameToConnect = "无名设备"
+        }else{ nameToConnect = peripheral.name! }
+        alertConnect.message = "正在连接:\(nameToConnect)..."
+        self.present(alertConnect, animated: true, completion: nil)
+        
     }
     
     //**************** 绑定tableView数据 **************
@@ -157,8 +188,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDele
         let myPeriDict:NSDictionary = myPeripherals[indexPath.row] as! NSDictionary
         myPeripheralToMainView = myPeriDict.value(forKey:"peripheral") as! CBPeripheral
         NSLog("传送外设变量 \(myPeripheralToMainView.name!)到下一页面")
-        self.performSegue(withIdentifier: "SearchViewtoServiceView", sender: nil)
+        connectPeripheral(peripheral: myPeripheralToMainView)
     }
+    
     
     //页面数据传递
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
