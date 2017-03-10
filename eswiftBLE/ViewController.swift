@@ -51,7 +51,12 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
         alertError.addAction(okAction)
         alertTIMEOUT.addAction(okAction)
         
+        //添加设备管理器的绑定
+        myCentralManager.delegate = self
+        
     }
+
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -123,7 +128,7 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
     }
     //链接成功，相应函数
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        NSLog("已连接\(peripheral.name)")
+        NSLog("已连接\(peripheral.name!)")
         self.myPeripheralToMainView! = peripheral
         alertConnect.dismiss(animated: true)
         self.performSegue(withIdentifier: "SearchViewtoServiceView", sender: nil)
@@ -139,7 +144,13 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
         self.present(alertConnect, animated: true, completion: nil)
         
     }
-    
+    //链接失败响应函数
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?){
+        NSLog("连接失败，设备名\(peripheral.name!),原因\(error)")
+        alertConnect.dismiss(animated: false, completion:  nil)
+        self.present(alertError, animated: false, completion:  nil)  //弹出失败提示框
+     
+    }
     //**************** 绑定tableView数据 **************
     //数据列数
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -197,7 +208,6 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
         
         if segue.identifier == "SearchViewtoServiceView" {
         
-            
             let vc = segue.destination as! ServiceViewController   //传递器
             vc.PeripheralToConncet = myPeripheralToMainView
             vc.trCBCentralManager = myCentralManager
