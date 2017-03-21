@@ -21,7 +21,7 @@ BTM: CoreBluetooth
 + 通知开关与接收 ✅
 
 ## Usage
-详细开发文档[CoreBluetooth开发文档](github.com/DennisMao/eswiftBLE/CoreBluetooth开发文档.md)
+详细开发文档[CoreBluetooth开发文档](https://github.com/DennisMao/eswiftBLE/blob/master/CoreBluetooth开发文档.md)
 ### 下载
 使用指令,切换到需要目标文件夹，以【~/Document】举例 Mac平台
 >cd ~/Document
