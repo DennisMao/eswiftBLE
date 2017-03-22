@@ -12,7 +12,9 @@ CoreBluetooth开发文档
 语言:Swift 3.0   
 开发平台: Xcode 7.1  
 调试平台: iphone6s ios 10.1  
+Github地址: https://github.com/DennisMao/eswiftBLE
 
+Github上已上传了个较完整的Demo，带有中文注释，可参考
 
 ## 框架
 ### 主要函数
@@ -253,27 +255,136 @@ propertiesString(properties: trCharactisticMax)!
 ```
 #### Read方式
 
+```
+PeripheralToConncet.readValue(for: trCharactisticMax)  //读取Max值
+```
+
 #### Notify方式
  
-### 写入数据
+```
+PeripheralToConncet.setNotifyValue(true, for: trCharactisticMax) //打开Notify
+PeripheralToConncet.setNotifyValue(false, for: trCharactisticMax) //关闭Notify
 
+``` 
+
+不管是Read还是Notify，接收到数据都会相应以下函数  
+【响应】接收响应
+
+```
+func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?){
+    if error == nil {
+        NSLog("成功读取到数据:\(characteristic.value!)")
+    }else{
+        NSLog("读取错误 \(error.debugDescription)")
+    }
+}
+```
+
+### 写入数据
+	
+>蓝牙4.0 BLE数据限制每次发送Payload即有效数据长度只有20bytes，后续版本该数据包大小会有增加 
+	
+	
 #### Write方式
 
+Write方式的特点是写入数据后蓝牙外设会返回写入结果以显示上一次写入操作是否成功，
+通过判断响应可知道写入的情况，适用于数据量小或者数据类型较分类的情况。    
+
+【动作】写入
+
+```
+PeripheralToConncet.writeValue(dataToTrans, for:   trCharactisticMin, type: CBCharacteristicWriteType.withResponse)
+```
+
+【响应】已写入数据
+
+```
+func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
+    if error == nil {
+        NSLog("写入成功，数据：\(characteristic.value!)成功")
+    }else{
+        NSLog("写入错误 \(error.debugDescription)")
+    }
+}
+```
 #### Write Without Response方式
 
+Write Without Response方式的特点是写入数据后蓝牙外设不返回写入结果以显示上一次写入操作是否成功。适用于数据连续，量大且自带头尾校验情况。    
+
+【动作】写入
+
+```
+PeripheralToConncet.writeValue(dataToTrans, for:   trWriteCharactisic, type: CBCharacteristicWriteType.withoutResponse)
+```
 
 
 ## 自定义辅助函数
 
 ### 权限显示函数
+由于当前版本CoreBluetooth里面的特性Properties不带字符串输出，在显示上会不太方便。故此写了个函数来输出当前特性所含的全部Properties，以string类型输出，可直接显示
 
-### TextField滚动显示函数
+【使用方法】
 
-## 实例
+```
+NSLog("当前Charactistic所含Properties有：" + \(propertiesString(properties: trCharactisticMax.properties)!))
+```
 
-### 完整读取(Notify)
+【函数】
 
-### 完整写入(Write)
+``` 
+    func propertiesString(properties: CBCharacteristicProperties)->(String)!{
+        var propertiesReturn : String = ""
+        // Just to see what we are dealing with
+        if (properties.rawValue & CBCharacteristicProperties.broadcast.rawValue) != 0 {
+            propertiesReturn += "broadcast|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.read.rawValue) != 0 {
+            propertiesReturn += "read|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.writeWithoutResponse.rawValue) != 0 {
+            propertiesReturn += "write without response|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.write.rawValue) != 0 {
+            propertiesReturn += "write|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.notify.rawValue) != 0 {
+            propertiesReturn += "notify|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.indicate.rawValue) != 0 {
+            propertiesReturn += "indicate|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.authenticatedSignedWrites.rawValue) != 0 {
+            propertiesReturn += "authenticated signed writes|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.extendedProperties.rawValue) != 0 {
+            propertiesReturn += "indicate|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.notifyEncryptionRequired.rawValue) != 0 {
+            propertiesReturn += "notify encryption required|"
+        }
+        if (properties.rawValue & CBCharacteristicProperties.indicateEncryptionRequired.rawValue) != 0 {
+            propertiesReturn += "indicate encryption required|"
+        }
+        return propertiesReturn
+    }
+```
+
+### TextView滚动显示函数
+在使用TextView时候系统未带插入数据后自动滚动到最新一行，比较不变，故此写了个函数，可解决以下问题：  
+1.插入数据后，自动滚动到最新一行   
+2.插入数据自动换行     
+3.可设置TextView数据缓存的最大长度，超出可自动清空
+
+```
+func addScollTextView(text: String){
+  if trTextDataRead.text.characters.count > 4000 {    //设置MAX_Length
+        trTextDataRead.text.removeAll()
+    }
+    trTextDataRead.text.append("\n" + text)
+trTextDataRead.scrollRangeToVisible(NSMakeRange(trTextDataRead.text.characters.count, 0))
+}
+```
+
 
 ## 常见问题
 整理了自己遇见的和StackOverflow里常见的问题。  
@@ -283,9 +394,11 @@ propertiesString(properties: trCharactisticMax)!
 >var myCentralManager: CBCentralManager!  
 >myCentralManager.delegate = self
 
-2. 
+2. 调用Write方式写入时候，一段时间BLE断开
+>检查响应函数，判断写入是否成功，若系统在30秒内未能接收到正确的响应，系统会主动申请断开链接
 
 ## 引用文档
-官方蓝牙开发指南: https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257 
+官方蓝牙开发指南: https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257     
+
 官方API: https://developer.apple.com/reference/corebluetooth 
 
