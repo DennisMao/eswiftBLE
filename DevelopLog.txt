@@ -1,0 +1,6 @@
+20170329
+1.Amend a portion of variables and constants'name
+20170330
+1.Modify the mainstory,apply AutoLayout.
+2.Add Regex for a portion of TextFields.To avoid mistakes resulted from the iuput of text.
+3.

@@ -27,7 +27,15 @@ BTM: CoreBluetooth
 >cd ~/Document
 >git clone git@github.com:DennisMao/eswiftBLE.git
 
+### 使用
+由于本软件对服务的UUID有限制，请下载后打开工程，找到ServiceViewController.swift文件
+[UUID_Characteristic] 常量，里面对应的值是蓝牙设备对应服务的UUID。  
 
+```
+    let UUID_Characteristic:[String] = ["0001","0002","0003","0004"]
+```
+
+将里面的**0001,0002,0003,0004**分别修改为目标设备的服务的UUID。数量可变，程序会自动识别   
 
 ## Develop
 

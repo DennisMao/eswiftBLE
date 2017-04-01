@@ -6,15 +6,23 @@
 //  Copyright © 2017年 Razil. All rights reserved.
 //
 
+/*********************** 工程使用说明 ******************/
+//在使用前请先修改 ServiceViewController.swift文件
+// [UUID_Characteristic] 常量，里面对应的值是蓝牙设备对应服务的UUID。
+/***********************   说明END   ******************/
+
 
 import UIKit
 import CoreBluetooth
 
 class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDelegate,UITableViewDataSource {
+    
+
+    
     //控件
     @IBOutlet weak var myButtonScan: UIButton!
     @IBOutlet weak var myTableView: UITableView!
-
+    
     let alertConnect = UIAlertController(title: "系统提示",
                                             message: "正在连接:...", preferredStyle: .alert)
     let alertError = UIAlertController(title: "系统提示",
@@ -29,7 +37,7 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
     //容器，保存搜索到的蓝牙设备
     var myPeripheralToMainView :CBPeripheral! //初始化外设，用以传递给主页面
     var myPeripherals: NSMutableArray = NSMutableArray() //初始化动态数组 用以储存字典
-    //服务和UUID  可用于过滤器限定（限定条件：1.UUID 2.服务UUID）
+    //服务和UUID  可用于过滤器限定（限定条件：1.设备UUID 2.服务UUID）
     
     
     override func viewDidLoad() {
@@ -50,9 +58,7 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
         alertTIMEOUT.addAction(okAction)
         
         //添加CBPeripheral管理器的委托
-        myCentralManager = CBCentralManager()
-        myCentralManager.delegate = self
-        
+        self.myCentralManager = CBCentralManager(delegate: self , queue: nil)
     }
 
 
@@ -76,6 +82,7 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
             NSLog("开始搜索")
             myButtonScan.setTitle("停止", for: UIControlState.normal)
             self.myCentralManager = CBCentralManager(delegate: self , queue: nil)
+            self.myCentralManager.scanForPeripherals(withServices: nil, options: nil)
             flagScan = true
         }
         
@@ -118,19 +125,19 @@ class ViewController: UIViewController,CBCentralManagerDelegate,UITableViewDeleg
                 r.setValue(advertisementData, forKey: "advertisementData")
                 myPeripherals.add(r)
                 
-                
                 NSLog("搜索到设备，Name=\(peripheral.name!) UUID=\(peripheral.identifier)")
             }
         }
         self.myTableView.reloadData()
         NSLog("刷新屏幕")
     }
+    
     //链接成功，相应函数
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         NSLog("已连接\(peripheral.name!)")
         self.myPeripheralToMainView! = peripheral
         self.alertConnect.dismiss(animated: false)
-        
+
         self.performSegue(withIdentifier: "SearchViewtoServiceView", sender: nil)
     }
     //自定义的连接函数，会弹出提示框

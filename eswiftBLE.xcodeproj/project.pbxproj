@@ -15,9 +15,31 @@
 		04AAF6001E6FB1A300B73041 /* eswiftBLETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF5FF1E6FB1A300B73041 /* eswiftBLETests.swift */; };
 		04AAF60B1E6FB1A400B73041 /* eswiftBLEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF60A1E6FB1A400B73041 /* eswiftBLEUITests.swift */; };
 		04AAF6191E6FB36A00B73041 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAF6181E6FB36A00B73041 /* ServiceViewController.swift */; };
+		74C3B6AF3C21E5AE19CF6290 /* Pods_eswiftBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CA66202176EB6DD9899B36 /* Pods_eswiftBLE.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0431FAA01E8FABED00B0EE4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA75491093248249A8567DFE072D4C6A;
+			remoteInfo = DownPicker;
+		};
+		0431FAA21E8FABED00B0EE4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E21470C84CF549D257B5C6D09DA2C857;
+			remoteInfo = "DownPicker-DownPicker";
+		};
+		0431FAA41E8FABED00B0EE4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B84FF05B70585EBBE7AFBE852ACBC9D;
+			remoteInfo = "Pods-eswiftBLE";
+		};
 		04AAF5FC1E6FB1A300B73041 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04AAF5DF1E6FB1A300B73041 /* Project object */;
@@ -35,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		04AAF5E71E6FB1A300B73041 /* eswiftBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eswiftBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAF5EA1E6FB1A300B73041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04AAF5EC1E6FB1A300B73041 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +72,9 @@
 		04AAF60A1E6FB1A400B73041 /* eswiftBLEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eswiftBLEUITests.swift; sourceTree = "<group>"; };
 		04AAF60C1E6FB1A400B73041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AAF6181E6FB36A00B73041 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		56CA66202176EB6DD9899B36 /* Pods_eswiftBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eswiftBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6216463B76C617B5044B0C4 /* Pods-eswiftBLE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eswiftBLE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eswiftBLE/Pods-eswiftBLE.debug.xcconfig"; sourceTree = "<group>"; };
+		C7BFF18F399ADDD05E11EDC2 /* Pods-eswiftBLE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eswiftBLE.release.xcconfig"; path = "Pods/Target Support Files/Pods-eswiftBLE/Pods-eswiftBLE.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74C3B6AF3C21E5AE19CF6290 /* Pods_eswiftBLE.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0431FA9B1E8FABED00B0EE4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0431FAA11E8FABED00B0EE4B /* DownPicker.framework */,
+				0431FAA31E8FABED00B0EE4B /* DownPicker.bundle */,
+				0431FAA51E8FABED00B0EE4B /* Pods_eswiftBLE.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		04AAF5DE1E6FB1A300B73041 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +120,8 @@
 				04AAF5FE1E6FB1A300B73041 /* eswiftBLETests */,
 				04AAF6091E6FB1A400B73041 /* eswiftBLEUITests */,
 				04AAF5E81E6FB1A300B73041 /* Products */,
+				8FA7CE0FF45BA9F6AA5FA1D2 /* Pods */,
+				9D7692F1498BC0D20B32A038 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +167,24 @@
 			path = eswiftBLEUITests;
 			sourceTree = "<group>";
 		};
+		8FA7CE0FF45BA9F6AA5FA1D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B6216463B76C617B5044B0C4 /* Pods-eswiftBLE.debug.xcconfig */,
+				C7BFF18F399ADDD05E11EDC2 /* Pods-eswiftBLE.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9D7692F1498BC0D20B32A038 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				56CA66202176EB6DD9899B36 /* Pods_eswiftBLE.framework */,
+				0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +192,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04AAF60F1E6FB1A400B73041 /* Build configuration list for PBXNativeTarget "eswiftBLE" */;
 			buildPhases = (
+				02A23CF3C56F508AF8FE488E /* [CP] Check Pods Manifest.lock */,
 				04AAF5E31E6FB1A300B73041 /* Sources */,
 				04AAF5E41E6FB1A300B73041 /* Frameworks */,
 				04AAF5E51E6FB1A300B73041 /* Resources */,
+				B229D587854BDA1637101BCE /* [CP] Embed Pods Frameworks */,
+				100FC646EEA4AF509C00B98F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,6 +284,12 @@
 			mainGroup = 04AAF5DE1E6FB1A300B73041;
 			productRefGroup = 04AAF5E81E6FB1A300B73041 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0431FA9B1E8FABED00B0EE4B /* Products */;
+					ProjectRef = 0431FA9A1E8FABED00B0EE4B /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				04AAF5E61E6FB1A300B73041 /* eswiftBLE */,
@@ -232,6 +298,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0431FAA11E8FABED00B0EE4B /* DownPicker.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DownPicker.framework;
+			remoteRef = 0431FAA01E8FABED00B0EE4B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0431FAA31E8FABED00B0EE4B /* DownPicker.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DownPicker.bundle;
+			remoteRef = 0431FAA21E8FABED00B0EE4B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0431FAA51E8FABED00B0EE4B /* Pods_eswiftBLE.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_eswiftBLE.framework;
+			remoteRef = 0431FAA41E8FABED00B0EE4B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		04AAF5E51E6FB1A300B73041 /* Resources */ = {
@@ -259,6 +349,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02A23CF3C56F508AF8FE488E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		100FC646EEA4AF509C00B98F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eswiftBLE/Pods-eswiftBLE-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B229D587854BDA1637101BCE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eswiftBLE/Pods-eswiftBLE-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		04AAF5E31E6FB1A300B73041 /* Sources */ = {
@@ -415,6 +553,7 @@
 		};
 		04AAF6101E6FB1A400B73041 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6216463B76C617B5044B0C4 /* Pods-eswiftBLE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U99KA2S425;
@@ -428,6 +567,7 @@
 		};
 		04AAF6111E6FB1A400B73041 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7BFF18F399ADDD05E11EDC2 /* Pods-eswiftBLE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U99KA2S425;
