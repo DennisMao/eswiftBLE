@@ -289,4 +289,3 @@ Please contect
 ## License 
 eswiftBLE source code is licensed under the MIT Licence
 
-func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){# 
